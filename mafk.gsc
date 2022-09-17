@@ -391,6 +391,10 @@ check_afk_player(endtime) {
 // only runs if mafk_hud is 1
 // draws the hud!
 afk_player_hud(endtime, time) {
+    if (isDefined(self.mafk_hud)) {
+        return;
+    }
+
     level endon("game_ended");
     self endon("disconnect");
 
@@ -401,7 +405,7 @@ afk_player_hud(endtime, time) {
     self.mafk_hud.hideWhenInMenu = 1;
 
     for(;;) {
-        if (getTime() >= endtime) {
+        if ((getTime() >= endtime) || !self.afk) {
             self.mafk_hud destroy();
             break;
         }
