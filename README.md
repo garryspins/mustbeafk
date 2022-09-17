@@ -1,5 +1,5 @@
 # MustBeAfk
-I was having trouble finding a good AFK system so I decided to make one was nice.
+I was having trouble finding a good AFK system so I decided to make one that was nice and simple.
 
 ![When AFK](https://i.imgur.com/qYqfVzG.jpeg)
 
