@@ -15,7 +15,6 @@ I was having trouble finding a good AFK system so I decided to make one that was
 ## Downloads
 Note that this requires [T6 GSC Utils](https://github.com/fedddddd/t6-gsc-utils).
 
-[Source code](https://github.com/garryspins/mustbeafk)
 [Compiled](https://github.com/garryspins/mustbeafk/releases)
 
 ## Configuration DVars
