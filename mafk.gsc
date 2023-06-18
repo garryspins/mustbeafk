@@ -22,6 +22,8 @@
         mafk_max_end    [bool  = 0]         - End the game if everyone is either down or afk?
 
         mafk_cooldown   [float = 15]        - How many minutes should you have to wait before using afk again.
+		
+		Conkley has edited this to replace createServerFontString with client sided font string instead.
 */
 
 #include maps\mp\_utility;
@@ -307,6 +309,7 @@ hook_chat(text, mode) {
         switch (split[1]) {
         case "off":
             self tell(level.mafk_name + " You're back!");
+			say(level.mafk_name + " " + self.name + " has returned from being AFK!");
             self set_afk(false);
             self notify("afkcancel");
             break;
@@ -344,6 +347,7 @@ hook_chat(text, mode) {
     switch (split[1]) {
     case "off":
         self tell(level.mafk_name + " You're back!");
+		say(level.mafk_name + " " + self.name + " has returned from being AFK!");
         self set_afk(false);
         self notify("afkcancel");
         break;
@@ -369,11 +373,12 @@ hook_chat(text, mode) {
 
 // runs on the player to check if he should still be afk or not
 check_afk_player(endtime) {
+	// These 3 endon's were moved here for better coding practices
+	self endon("disconnect");
+    self endon("afkcancel");
+    level endon("end_game");
+	
     for (;;) {
-        self endon("disconnect");
-        self endon("afkcancel");
-        level endon("game_ended");
-
         time = getTime();
     
         if (time >= endtime) {
@@ -395,12 +400,12 @@ afk_player_hud(endtime, time) {
         return;
     }
 
-    level endon("game_ended");
+    level endon("end_game");
     self endon("disconnect");
 
-    self.mafk_hud = createServerFontString("objective", 2);
+    self.mafk_hud = createFontString("objective", 2);
     self.mafk_hud setPoint("CENTER", "TOP", 0, 0);
-    self.mafk_hud setText("You are currently afk");
+    self.mafk_hud setText("You are currently afk!");
     
     self.mafk_hud.hideWhenInMenu = 1;
 
